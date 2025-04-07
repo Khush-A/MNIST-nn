@@ -1,6 +1,5 @@
 # PyTorch Neural Network practice using MNISTNet
 
-
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
 import torch.nn as nn
@@ -14,8 +13,6 @@ transform = transforms.Compose([
 
 train_dataset = datasets.MNIST(root='./data', train=True, download=True, transform=transform)
 train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True)
-
-
 
 class MNISTNet(nn.Module):
     def __init__(self):
@@ -36,11 +33,10 @@ class MNISTNet(nn.Module):
         x = self.fc2(x)
         return x
 
-# 4. Instantiate Model and Test on One Batch
+# Instantiate Model and Test on One Batch
 model = MNISTNet()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.1)
-
 
 # Get one batch from the DataLoader
 for images, labels in train_loader:

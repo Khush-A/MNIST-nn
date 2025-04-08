@@ -9,7 +9,7 @@ import torch.optim as optim
 transform = transforms.Compose([
     transforms.ToTensor(),
     transforms.Normalize((0.1307,), (0.3081,))  # Normalizing using MNIST mean and std
-])
+]) 
 
 train_dataset = datasets.MNIST(root='./data', train=True, download=True, transform=transform)
 train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True)
@@ -33,7 +33,7 @@ class MNISTNet(nn.Module):
         x = self.fc2(x)
         return x
 
-# Instantiate Model and Test on One Batch
+# Instantiate Model and Test on one Batch
 model = MNISTNet()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.1)

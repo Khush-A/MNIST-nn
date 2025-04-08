@@ -38,6 +38,12 @@ model = MNISTNet()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.1)
 
+# Encouraging sparsity by apply L1 regularization
+l1_lambda = 1e-5
+l1_norm = sum(p.abs().sum() for p in model.parameters())
+# original loss (0.5) is slightly increased due to the l1 regularisation norm
+loss = 0.5 + l1_lambda * l1_norm
+
 # Get one batch from the DataLoader
 for images, labels in train_loader:
     output = model(images)  # Forward pass
